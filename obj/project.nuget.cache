@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RHcIGcNGvAw=",
+  "success": true,
+  "projectFilePath": "C:\\SÉPTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferretería Web\\FerreteríaWeb_Backend\\FerreteríaWeb_Backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Carim\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.9\\microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "C:\\Users\\Carim\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
