@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\S\u00C9PTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferreter\u00EDa Web\\Ferreter\u00EDaWeb_Backend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9A129970-3C32-49C5-999F-76CD67CD67E7}|Ferreter\u00EDaWeb_Backend.csproj|c:\\s\u00E9ptimo semestre\\desarrollo web\\proyectos finales\\ferreter\u00EDa web\\ferreter\u00EDaweb_backend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{9A129970-3C32-49C5-999F-76CD67CD67E7}|Ferreter\u00EDaWeb_Backend.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A129970-3C32-49C5-999F-76CD67CD67E7}|Ferreter\u00EDaWeb_Backend.csproj|c:\\s\u00E9ptimo semestre\\desarrollo web\\proyectos finales\\ferreter\u00EDa web\\ferreter\u00EDaweb_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A129970-3C32-49C5-999F-76CD67CD67E7}|Ferreter\u00EDaWeb_Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 859,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +27,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\S\u00C9PTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferreter\u00EDa Web\\Ferreter\u00EDaWeb_Backend\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\S\u00C9PTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferreter\u00EDa Web\\Ferreter\u00EDaWeb_Backend\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-12-26T22:42:52.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\S\u00C9PTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferreter\u00EDa Web\\Ferreter\u00EDaWeb_Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\S\u00C9PTIMO SEMESTRE\\DESARROLLO WEB\\PROYECTOS FINALES\\Ferreter\u00EDa Web\\Ferreter\u00EDaWeb_Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T22:32:00.475Z",
+              "EditorCaption": ""
             }
           ]
         },

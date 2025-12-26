@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FerreteríaWeb_Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd88489a2a57b737e718e3d7f65e1026004732e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d85b82a5533405dd08d530c72dec6f55d22e031b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FerreteríaWeb_Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FerreteríaWeb_Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
