@@ -4,3 +4,4 @@
 *.cache
 *.json
 !appsettings.json
+.suo
