@@ -56,5 +56,44 @@ namespace FerreteríaWeb_Backend.Services
             var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(bytes);
         }
+
+        public List<EmployeeListItemDto> GetActiveEmployees()
+        {
+            return _employeeDao.GetActiveEmployees().Select(e => new EmployeeListItemDto
+            {
+                Id = e.Id,
+                FullName = $"{e.Name} {e.LastName} {e.SecondLastName}"
+            }).ToList();
+        }
+
+        public UpdateEmployeeResponseDto UpdateEmployee(int id, UpdateEmployeeRequestDto dto)
+        {
+            var employee = _employeeDao.GetById(id);
+            if (employee == null || !employee.IsActive)
+                throw new InvalidOperationException("Empleado no encontrado.");
+
+            if (string.IsNullOrWhiteSpace(dto.Name) ||
+                string.IsNullOrWhiteSpace(dto.LastName) ||
+                string.IsNullOrWhiteSpace(dto.Phone))
+                throw new InvalidOperationException("Por favor llene todos los campos obligatorios.");
+
+            employee.Name = dto.Name;
+            employee.LastName = dto.LastName;
+            employee.SecondLastName = dto.SecondLastName;
+            employee.Phone = dto.Phone;
+            employee.BirthDate = dto.BirthDate;
+            employee.Gender = dto.Gender;
+            employee.City = dto.City;
+            employee.Address = dto.Address;
+            employee.PostalCode = dto.PostalCode;
+
+            _employeeDao.Update(employee);
+
+            return new UpdateEmployeeResponseDto
+            {
+                Id = employee.Id,
+                Message = "Los datos del empleado se han actualizado correctamente."
+            };
+        }
     }
 }
