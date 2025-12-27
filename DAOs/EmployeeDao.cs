@@ -24,5 +24,11 @@ namespace FerreteríaWeb_Backend.DAOs
             _context.SaveChanges();
             return employee;
         }
+
+        public Employee? GetByEmail(string email)
+        {
+            return _context.Employees
+                .FirstOrDefault(e => e.Email == email);
+        }
     }
 }

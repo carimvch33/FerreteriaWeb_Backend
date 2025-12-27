@@ -1,5 +1,6 @@
 ﻿using FerreteríaWeb_Backend.Models.DTOs.Employees;
 using FerreteríaWeb_Backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FerreteríaWeb_Backend.Controllers
@@ -15,6 +16,7 @@ namespace FerreteríaWeb_Backend.Controllers
             _employeeService = employeeService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult RegisterEmployee([FromBody] RegisterEmployeeDto dto)
         {

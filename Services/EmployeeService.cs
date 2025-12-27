@@ -25,8 +25,7 @@ namespace FerreteríaWeb_Backend.Services
 
             if (_employeeDao.ExistsByEmail(dto.Email))
             {
-                throw new InvalidOperationException(
-                    "Ya existe una cuenta para ese correo electrónico."
+                throw new InvalidOperationException("Ya existe una cuenta para ese correo electrónico."
                 );
             }
 
