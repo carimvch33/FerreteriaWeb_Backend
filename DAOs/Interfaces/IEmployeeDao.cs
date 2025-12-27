@@ -7,5 +7,8 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
         bool ExistsByEmail(string email);
         Employee Create(Employee employee);
         Employee? GetByEmail(string email);
+        List<Employee> GetActiveEmployees();
+        Employee? GetById(int id);
+        void Update(Employee employee);
     }
 }

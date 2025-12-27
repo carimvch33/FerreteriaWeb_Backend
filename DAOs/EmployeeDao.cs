@@ -30,5 +30,21 @@ namespace FerreteríaWeb_Backend.DAOs
             return _context.Employees
                 .FirstOrDefault(e => e.Email == email);
         }
+
+        public List<Employee> GetActiveEmployees()
+        {
+            return _context.Employees.Where(e => e.IsActive && e.Role == EmployeeRole.Employee).ToList();
+        }
+
+        public Employee? GetById(int id)
+        {
+            return _context.Employees.FirstOrDefault(e => e.Id == id);
+        }
+
+        public void Update(Employee employee)
+        {
+            _context.Employees.Update(employee);
+            _context.SaveChanges();
+        }
     }
 }

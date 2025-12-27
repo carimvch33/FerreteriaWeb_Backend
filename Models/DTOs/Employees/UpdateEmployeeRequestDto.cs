@@ -2,7 +2,7 @@
 
 namespace FerreteríaWeb_Backend.Models.DTOs.Employees
 {
-    public class RegisterEmployeeDto
+    public class UpdateEmployeeRequestDto
     {
         [Required]
         [MaxLength(50)]
@@ -14,10 +14,6 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
 
         [MaxLength(50)]
         public string? SecondLastName { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = null!;
 
         [Required]
         [Phone]
@@ -38,12 +34,5 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
         [Required]
         [MaxLength(5)]
         public string PostalCode { get; set; } = null!;
-
-        [Required]
-        [MinLength(8)]
-        public string Password { get; set; } = null!;
-
-        [Required]
-        public string ConfirmPassword { get; set; } = null!;
     }
 }

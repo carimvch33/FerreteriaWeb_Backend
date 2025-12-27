@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FerreteríaWeb_Backend.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/employees")]
     public class EmployeeController : ControllerBase
@@ -16,7 +17,6 @@ namespace FerreteríaWeb_Backend.Controllers
             _employeeService = employeeService;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult RegisterEmployee([FromBody] RegisterEmployeeDto dto)
         {
@@ -50,5 +50,28 @@ namespace FerreteríaWeb_Backend.Controllers
             }
         }
 
+        [HttpGet("active")]
+        public IActionResult GetActiveEmployees()
+        {
+            return Ok(_employeeService.GetActiveEmployees());
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateEmployee(int id, [FromBody] UpdateEmployeeRequestDto dto)
+        {
+            try
+            {
+                var response = _employeeService.UpdateEmployee(id, dto);
+                return Ok(response);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
+            }
+        }
     }
 }
