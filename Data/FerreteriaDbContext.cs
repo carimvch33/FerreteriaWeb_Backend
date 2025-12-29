@@ -1,6 +1,5 @@
 ﻿using FerreteríaWeb_Backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace FerreteríaWeb_Backend.Data
 {
@@ -10,5 +9,6 @@ namespace FerreteríaWeb_Backend.Data
             : base(options) { }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Provider> Providers { get; set; }
     }
 }
