@@ -25,8 +25,7 @@ namespace FerreteríaWeb_Backend.Services
 
             if (_employeeDao.ExistsByEmail(dto.Email))
             {
-                throw new InvalidOperationException("Ya existe una cuenta para ese correo electrónico."
-                );
+                throw new InvalidOperationException("Ya existe una cuenta para ese correo electrónico. Por favor inicie sesión o use un correo diferente.");
             }
 
             var employee = new Employee
@@ -69,13 +68,11 @@ namespace FerreteríaWeb_Backend.Services
         public UpdateEmployeeResponseDto UpdateEmployee(int id, UpdateEmployeeRequestDto dto)
         {
             var employee = _employeeDao.GetById(id);
-            if (employee == null || !employee.IsActive)
-                throw new InvalidOperationException("Empleado no encontrado.");
 
-            if (string.IsNullOrWhiteSpace(dto.Name) ||
-                string.IsNullOrWhiteSpace(dto.LastName) ||
-                string.IsNullOrWhiteSpace(dto.Phone))
-                throw new InvalidOperationException("Por favor llene todos los campos obligatorios.");
+            if (employee == null || !employee.IsActive)
+            {
+                throw new InvalidOperationException("Empleado no encontrado.");
+            }
 
             employee.Name = dto.Name;
             employee.LastName = dto.LastName;
@@ -93,6 +90,24 @@ namespace FerreteríaWeb_Backend.Services
             {
                 Id = employee.Id,
                 Message = "Los datos del empleado se han actualizado correctamente."
+            };
+        }
+
+        public UpdateEmployeeResponseDto DeleteEmployee(int id)
+        {
+            var employee = _employeeDao.GetById(id);
+
+            if (employee == null || !employee.IsActive)
+            {
+                throw new InvalidOperationException("Empleado no encontrado.");
+            }
+
+            _employeeDao.Deactivate(employee);
+
+            return new UpdateEmployeeResponseDto
+            {
+                Id = employee.Id,
+                Message = "El empleado ha sido eliminado correctamente."
             };
         }
     }

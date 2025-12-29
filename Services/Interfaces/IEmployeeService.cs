@@ -8,5 +8,6 @@ namespace FerreteríaWeb_Backend.Services.Interfaces
         Employee RegisterEmployee(RegisterEmployeeDto dto);
         List<EmployeeListItemDto> GetActiveEmployees();
         UpdateEmployeeResponseDto UpdateEmployee(int id, UpdateEmployeeRequestDto dto);
+        UpdateEmployeeResponseDto DeleteEmployee(int id);
     }
 }

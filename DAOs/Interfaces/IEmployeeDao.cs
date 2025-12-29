@@ -10,5 +10,6 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
         List<Employee> GetActiveEmployees();
         Employee? GetById(int id);
         void Update(Employee employee);
+        void Deactivate(Employee employee);
     }
 }
