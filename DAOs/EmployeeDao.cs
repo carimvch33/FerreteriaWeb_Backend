@@ -46,5 +46,13 @@ namespace FerreteríaWeb_Backend.DAOs
             _context.Employees.Update(employee);
             _context.SaveChanges();
         }
+
+        public void Deactivate(Employee employee)
+        {
+            employee.IsActive = false;
+            _context.Employees.Update(employee);
+            _context.SaveChanges();
+        }
+
     }
 }

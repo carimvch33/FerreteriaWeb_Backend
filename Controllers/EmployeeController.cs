@@ -53,7 +53,18 @@ namespace FerreteríaWeb_Backend.Controllers
         [HttpGet("active")]
         public IActionResult GetActiveEmployees()
         {
-            return Ok(_employeeService.GetActiveEmployees());
+            try
+            {
+                return Ok(_employeeService.GetActiveEmployees());
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
+            }
         }
 
         [HttpPut("{id}")]
@@ -63,6 +74,23 @@ namespace FerreteríaWeb_Backend.Controllers
             {
                 var response = _employeeService.UpdateEmployee(id, dto);
                 return Ok(response);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
+            }
+        }
+
+        [HttpPut("{id}/delete")]
+        public IActionResult DeleteEmployee(int id)
+        {
+            try
+            {
+                return Ok(_employeeService.DeleteEmployee(id));
             }
             catch (InvalidOperationException ex)
             {
