@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using FerreteríaWeb_Backend.DAOs;
-using FerreteríaWeb_Backend.DAOs.Interfaces;
-using FerreteríaWeb_Backend.Data;
-using FerreteríaWeb_Backend.Services;
-using FerreteríaWeb_Backend.Services.Interfaces;
+using FerreterÃ­aWeb_Backend.DAOs;
+using FerreterÃ­aWeb_Backend.DAOs.Interfaces;
+using FerreterÃ­aWeb_Backend.Data;
+using FerreterÃ­aWeb_Backend.Services;
+using FerreterÃ­aWeb_Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +19,10 @@ builder.Services.AddDbContext<FerreteriaDbContext>(options =>
 );
 
 builder.Services.AddScoped<IEmployeeDao, EmployeeDao>();
+builder.Services.AddScoped<IProviderDao, ProviderDao>();
+
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IProviderService, ProviderService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
