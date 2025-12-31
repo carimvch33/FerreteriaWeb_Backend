@@ -22,12 +22,11 @@ builder.Services.AddScoped<IEmployeeDao, EmployeeDao>();
 builder.Services.AddScoped<IProviderDao, ProviderDao>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-<<<<<<< HEAD
 builder.Services.AddScoped<ICategoryDao, CategoryDao>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-=======
 builder.Services.AddScoped<IProviderService, ProviderService>();
->>>>>>> 8616dfd9eb0703cfc1dd67980c5b0162c004ed05
+builder.Services.AddScoped<IProductDao, ProductDao>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

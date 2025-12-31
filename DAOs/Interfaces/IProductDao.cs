@@ -2,10 +2,9 @@
 
 namespace FerreteríaWeb_Backend.DAOs.Interfaces
 {
-    public interface ICategoryDao
+    public interface IProductDao
     {
         bool ExistsByName(string name);
-        Category Create(Category category);
-        Category? GetById(int id);
+        Product Create(Product product);
     }
 }
