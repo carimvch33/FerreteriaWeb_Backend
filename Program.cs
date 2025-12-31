@@ -20,6 +20,8 @@ builder.Services.AddDbContext<FerreteriaDbContext>(options =>
 
 builder.Services.AddScoped<IEmployeeDao, EmployeeDao>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ICategoryDao, CategoryDao>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

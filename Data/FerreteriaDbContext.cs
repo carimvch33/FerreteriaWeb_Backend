@@ -10,5 +10,6 @@ namespace FerreteríaWeb_Backend.Data
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Provider> Providers { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
