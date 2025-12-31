@@ -1,6 +1,30 @@
-@FerreteríaWeb_Backend_HostAddress = http://localhost:5263
+@FerreteríaWeb_Backend_HostAddress = http://localhost:5000
 
-GET {{FerreteríaWeb_Backend_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{FerreteríaWeb_Backend_HostAddress}}/api/provider
+Content-Type: application/json
 
+{
+    "rfc": "ABCD123456XYQ",
+    "name": "Proveedor Ejemplo",
+    "phone": "2284756321",
+    "email": "proveedor@gmail.com",
+    "address": "Calle Falsa 123, Ciudad, País"
+}
 ###
+
+GET {{FerreteríaWeb_Backend_HostAddress}}/api/provider/2
+Accept: application/json
+###
+
+PUT {{FerreteríaWeb_Backend_HostAddress}}/api/provider/2
+Content-Type: application/json
+
+{
+    "rfc": "ABCD123456XYQ",
+    "name": "Proveedor Ejemplo actualizado",
+    "phone": "2284756321",
+    "email": "proveedor@gmail.com",
+    "phone": "2298765432",
+    "address": "Calle Falsa 123, Ciudad, País",
+    "active": false
+}
