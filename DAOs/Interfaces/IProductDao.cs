@@ -6,5 +6,7 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
     {
         bool ExistsByName(string name);
         Product Create(Product product);
+        Product? GetById(int id);
+        void Update(Product product);
     }
 }

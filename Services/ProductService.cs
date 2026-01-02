@@ -38,5 +38,37 @@ namespace FerreteríaWeb_Backend.Services
 
             return _productDao.Create(product);
         }
+
+        public UpdateProductResponseDto UpdateProduct(int id, UpdateProductDto dto)
+        {
+            var product = _productDao.GetById(id);
+            var category = _categoryDao.GetById(dto.CategoryId);
+            if (category == null)
+                throw new InvalidOperationException("La categoría no existe.");
+
+
+            if (product == null)
+                throw new InvalidOperationException("Producto no encontrado.");
+
+            product.Name = dto.Name;
+            product.Description = dto.Description;
+            product.Price = dto.Price;
+            product.Stock = dto.Stock;
+            product.CategoryId = dto.CategoryId;
+            product.IsActive = dto.IsActive;
+
+            _productDao.Update(product);
+            var message = dto.IsActive
+                ? "Producto actualizado correctamente."
+                : "Producto desactivado correctamente.";
+
+
+            return new UpdateProductResponseDto
+            {
+                Id = product.Id,
+                Message = message
+            };
+        }
+
     }
 }

@@ -24,5 +24,14 @@ namespace FerreteríaWeb_Backend.DAOs
             _context.SaveChanges();
             return product;
         }
+        public Product? GetById(int id)
+        {
+            return _context.Products.FirstOrDefault(p => p.Id == id);
+        }
+        public void Update(Product product)
+        {
+            _context.Products.Update(product);
+            _context.SaveChanges();
+        }
     }
 }

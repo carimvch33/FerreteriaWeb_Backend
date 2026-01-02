@@ -25,7 +25,7 @@ namespace FerreteríaWeb_Backend.Controllers
             {
                 var product = _productService.RegisterProduct(dto);
 
-                var response = new ProductResponseDto
+                return Created("", new ProductResponseDto
                 {
                     Id = product.Id,
                     Name = product.Name,
@@ -34,18 +34,27 @@ namespace FerreteríaWeb_Backend.Controllers
                     Stock = product.Stock,
                     CategoryId = product.CategoryId,
                     IsActive = product.IsActive
-                };
-
-                return Created("", response);
+                });
             }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (Exception)
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(int id, [FromBody] UpdateProductDto dto)
+        {
+            try
             {
-                return StatusCode(500, "Ocurrió un error inesperado.");
+                var response = _productService.UpdateProduct(id, dto);
+                return Ok(response);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
             }
         }
     }
+
 }
