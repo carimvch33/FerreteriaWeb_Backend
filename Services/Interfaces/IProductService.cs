@@ -7,5 +7,6 @@ namespace FerreteríaWeb_Backend.Services.Interfaces
     {
         Product RegisterProduct(RegisterProductDto dto);
         UpdateProductResponseDto UpdateProduct(int productId, UpdateProductDto dto);
+        AddInventoryResponseDto AddInventory(int productId, AddInventoryDto dto);
     }
 }

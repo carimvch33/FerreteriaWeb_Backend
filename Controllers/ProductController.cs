@@ -1,6 +1,7 @@
 ﻿using FerreteríaWeb_Backend.Models.DTOs.Products;
 using FerreteríaWeb_Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteríaWeb_Backend.Controllers
 {
@@ -53,6 +54,28 @@ namespace FerreteríaWeb_Backend.Controllers
             catch (InvalidOperationException ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin,Employee")]
+        [HttpPut("{id}/add-inventory")]
+        public IActionResult AddInventory(int id, [FromBody] AddInventoryDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var response = _productService.AddInventory(id, dto);
+                return Ok(response);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
             }
         }
     }

@@ -69,6 +69,26 @@ namespace FerreteríaWeb_Backend.Services
                 Message = message
             };
         }
+        public AddInventoryResponseDto AddInventory(int productId, AddInventoryDto dto)
+        {
+            if (dto.Quantity <= 0)
+                throw new InvalidOperationException("La cantidad debe ser mayor a cero.");
 
+            var product = _productDao.GetById(productId);
+
+            if (product == null || !product.IsActive)
+                throw new InvalidOperationException("Producto no encontrado o inactivo.");
+
+            product.Stock += dto.Quantity;
+
+            _productDao.Update(product);
+
+            return new AddInventoryResponseDto
+            {
+                ProductId = product.Id,
+                NewStock = product.Stock,
+                Message = "El inventario se ha actualizado correctamente."
+            };
+        }
     }
 }
