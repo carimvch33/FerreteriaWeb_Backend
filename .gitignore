@@ -3,6 +3,5 @@
 .vs/
 *.cache
 *.json
-!appsettings.json
 *.suo
 *.user

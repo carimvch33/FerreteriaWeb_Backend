@@ -17,10 +17,12 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
 
         [Required]
         [EmailAddress]
+        [MaxLength(254)]
         public string Email { get; set; } = null!;
 
         [Required]
         [Phone]
+        [MaxLength(10)]
         public string Phone { get; set; } = null!;
 
         [Required]
@@ -30,9 +32,11 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
         public string Gender { get; set; } = null!;
 
         [Required]
+        [MaxLength(100)]
         public string City { get; set; } = null!;
 
         [Required]
+        [MaxLength(255)]
         public string Address { get; set; } = null!;
 
         [Required]
@@ -40,7 +44,7 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
         public string PostalCode { get; set; } = null!;
 
         [Required]
-        [MinLength(8)]
+        [MinLength(60)]
         public string Password { get; set; } = null!;
 
         [Required]
