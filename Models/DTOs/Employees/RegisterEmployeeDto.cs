@@ -44,10 +44,11 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
         public string PostalCode { get; set; } = null!;
 
         [Required]
-        [MinLength(60)]
+        [MaxLength(60)]
         public string Password { get; set; } = null!;
 
         [Required]
+        [MaxLength(60)]
         public string ConfirmPassword { get; set; } = null!;
     }
 }
