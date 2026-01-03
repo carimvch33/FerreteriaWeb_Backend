@@ -25,10 +25,10 @@ namespace FerreteríaWeb_Backend.Services
             var employee = _employeeDao.GetByEmail(dto.Email);
 
             if (employee == null || !employee.IsActive)
-                throw new InvalidOperationException("Credenciales inválidas.");
+                throw new InvalidOperationException("Usuario o contraseña incorrectos");
 
             if (employee.PasswordHash != HashPassword(dto.Password))
-                throw new InvalidOperationException("Credenciales inválidas.");
+                throw new InvalidOperationException("Usuario o contraseña incorrectos");
 
             var claims = new List<Claim>
             {

@@ -17,6 +17,7 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
 
         [Required]
         [Phone]
+        [MaxLength(10)]
         public string Phone { get; set; } = null!;
 
         [Required]
@@ -26,9 +27,11 @@ namespace FerreteríaWeb_Backend.Models.DTOs.Employees
         public string Gender { get; set; } = null!;
 
         [Required]
+        [MaxLength(100)]
         public string City { get; set; } = null!;
 
         [Required]
+        [MaxLength(255)]
         public string Address { get; set; } = null!;
 
         [Required]
