@@ -78,6 +78,20 @@ namespace FerreteríaWeb_Backend.Controllers
                 return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
             }
         }
+
+        [Authorize(Roles = "Admin,Employee")]
+        [HttpGet("active")]
+        public IActionResult GetActiveProducts()
+        {
+            try
+            {
+                return Ok(_productService.GetActiveProducts());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
+            }
+        }
     }
 
 }

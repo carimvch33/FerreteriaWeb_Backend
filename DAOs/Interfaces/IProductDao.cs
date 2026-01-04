@@ -8,5 +8,6 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
         Product Create(Product product);
         Product? GetById(int id);
         void Update(Product product);
+        List<Product> GetActiveProducts();
     }
 }

@@ -46,5 +46,36 @@ namespace FerreteríaWeb_Backend.Controllers
                 return StatusCode(500, "Ocurrió un error inesperado.");
             }
         }
+
+        [HttpGet("active")]
+        public IActionResult GetActiveCategories()
+        {
+            try
+            {
+                return Ok(_categoryService.GetActiveCategories());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado.");
+            }
+        }
+        [HttpGet("{id}/products")]
+        public IActionResult GetProductsByCategory(int id)
+        {
+            try
+            {
+                return Ok(_categoryService.GetActiveProductsByCategory(id));
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado.");
+            }
+        }
+
+
     }
 }

@@ -33,5 +33,12 @@ namespace FerreteríaWeb_Backend.DAOs
             _context.Products.Update(product);
             _context.SaveChanges();
         }
+        public List<Product> GetActiveProducts()
+        {
+            return _context.Products
+                .Where(p => p.IsActive)
+                .ToList();
+        }
+
     }
 }

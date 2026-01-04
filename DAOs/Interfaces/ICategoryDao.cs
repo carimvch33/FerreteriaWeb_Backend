@@ -7,5 +7,8 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
         bool ExistsByName(string name);
         Category Create(Category category);
         Category? GetById(int id);
+        List<Category> GetActiveWithProducts();
+        Category GetByIdWithProducts(int id);
+
     }
 }

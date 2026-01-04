@@ -1,6 +1,7 @@
 ﻿using FerreteríaWeb_Backend.DAOs.Interfaces;
 using FerreteríaWeb_Backend.Data;
 using FerreteríaWeb_Backend.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FerreteríaWeb_Backend.DAOs
 {
@@ -28,6 +29,19 @@ namespace FerreteríaWeb_Backend.DAOs
         public Category? GetById(int id)
         {
             return _context.Categories.FirstOrDefault(c => c.Id == id && c.IsActive);
+        }
+        public List<Category> GetActiveWithProducts()
+        {
+            return _context.Categories
+                .Include(c => c.Products.Where(p => p.IsActive))
+                .Where(c => c.IsActive)
+                .ToList();
+        }
+        public Category GetByIdWithProducts(int id)
+        {
+            return _context.Categories
+                .Include(c => c.Products.Where(p => p.IsActive))
+                .FirstOrDefault(c => c.Id == id);
         }
     }
 }

@@ -90,5 +90,20 @@ namespace FerreteríaWeb_Backend.Services
                 Message = "El inventario se ha actualizado correctamente."
             };
         }
+        public List<ProductListItemDto> GetActiveProducts()
+        {
+            return _productDao.GetActiveProducts()
+                .Select(p => new ProductListItemDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Stock = p.Stock,
+                    CategoryId = p.CategoryId
+                })
+                .ToList();
+        }
+
     }
 }

@@ -15,5 +15,6 @@ namespace FerreteríaWeb_Backend.Models.Entities
 
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
