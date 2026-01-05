@@ -67,6 +67,24 @@ namespace FerreteríaWeb_Backend.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetEmployeeById(int id)
+        {
+            try
+            {
+                var employee = _employeeService.GetEmployeeById(id);
+                return Ok(employee);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
+            }
+        }
+
         [HttpPut("{id}")]
         public IActionResult UpdateEmployee(int id, [FromBody] UpdateEmployeeRequestDto dto)
         {

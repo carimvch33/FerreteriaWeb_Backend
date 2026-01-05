@@ -61,8 +61,31 @@ namespace FerreteríaWeb_Backend.Services
             return _employeeDao.GetActiveEmployees().Select(e => new EmployeeListItemDto
             {
                 Id = e.Id,
-                FullName = $"{e.Name} {e.LastName} {e.SecondLastName}"
+                Name = e.Name,
+                LastName = $"{e.LastName} {e.SecondLastName}",
+                Email = e.Email,
+                Phone = e.Phone
             }).ToList();
+        }
+
+        public UpdateEmployeeResponseDto GetEmployeeById(int id)
+        {
+            var employee = _employeeDao.GetById(id)
+                ?? throw new InvalidOperationException("Empleado no encontrado");
+
+            return new UpdateEmployeeResponseDto
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                LastName = employee.LastName,
+                SecondLastName = employee.SecondLastName,
+                Phone = employee.Phone,
+                BirthDate = employee.BirthDate,
+                Gender = employee.Gender,
+                City = employee.City,
+                Address = employee.Address,
+                PostalCode = employee.PostalCode
+            };
         }
 
         public UpdateEmployeeResponseDto UpdateEmployee(int id, UpdateEmployeeRequestDto dto)
@@ -89,7 +112,15 @@ namespace FerreteríaWeb_Backend.Services
             return new UpdateEmployeeResponseDto
             {
                 Id = employee.Id,
-                Message = "Los datos del empleado se han actualizado correctamente."
+                Name = employee.Name,
+                LastName = employee.LastName,
+                SecondLastName = employee.SecondLastName,
+                Phone = employee.Phone,
+                BirthDate = employee.BirthDate,
+                Gender = employee.Gender,
+                City = employee.City,
+                Address = employee.Address,
+                PostalCode = employee.PostalCode,
             };
         }
 
@@ -107,7 +138,6 @@ namespace FerreteríaWeb_Backend.Services
             return new UpdateEmployeeResponseDto
             {
                 Id = employee.Id,
-                Message = "El empleado ha sido eliminado correctamente."
             };
         }
     }
