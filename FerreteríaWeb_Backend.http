@@ -25,6 +25,33 @@ Content-Type: application/json
     "phone": "2284756321",
     "email": "proveedor@gmail.com",
     "phone": "2298765432",
-    "address": "Calle Falsa 123, Ciudad, País",
+    "address": "Calle Falsa 123, Ciudad, País",s
     "active": false
 }
+
+###
+POST {{FerreteríaWeb_Backend_HostAddress}}/api/employees
+Content-Type: application/json
+
+{
+    "name": "a",
+    "lastname": "q",
+    "secondlastname": "q",
+    "email": "admin@gmail.com",
+    "phone": "2284756321",
+    "birthdate": "1990-01-01T00:00:00",
+    "gender": "M",
+    "city": "Ciudad",
+    "address": "Calle Falsa 123",
+    "postalcode": "12345",
+    "password": "contrasenaSegura1*",
+    "confirmPassword": "contrasenaSegura1*"
+}
+###
+
+GET {{FerreteríaWeb_Backend_HostAddress}}/api/provider
+Accept: application/json
+###
+
+PATCH  {{FerreteríaWeb_Backend_HostAddress}}/api/provider/1/state
+###

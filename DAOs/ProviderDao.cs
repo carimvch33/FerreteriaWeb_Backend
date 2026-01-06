@@ -49,6 +49,43 @@ public class ProviderDao : IProviderDao
         return result;
     }
 
+    public Result<List<ProviderDto>> GetAllProviders()
+    {
+        Result<List<ProviderDto>> result = new();
+        List<ProviderDto> providers = [];
+
+        try
+        {
+            var queryResult = _context.Providers.Where((p) => p.Id > 0);
+            foreach (Provider p in queryResult)
+            {
+                providers.Add(new()
+                {
+                    Id = p.Id,
+                    Rfc = p.Rfc,
+                    Name = p.Name,
+                    Phone = p.Phone,
+                    Email = p.Email,
+                    Address = p.Address,
+                    Active = p.Active
+                });
+            }
+        }
+        catch (DbUpdateException error)
+        {
+            result.InnerException = error;
+            result.IsAccomplished = false;
+        }
+
+        if (result.InnerException is null)
+        {
+            result.Data = providers;
+            result.IsAccomplished = true;
+        }
+
+        return result;
+    }
+
     public Result<ProviderDto?> GetProvider(int id)
     {
         Result<ProviderDto?> result = new();
@@ -124,7 +161,36 @@ public class ProviderDao : IProviderDao
                 foundProvider.Phone = provider.Phone;
                 foundProvider.Email = provider.Email;
                 foundProvider.Address = provider.Address;
-                foundProvider.Active = provider.Active;
+                _context.Update(foundProvider);
+                _context.SaveChanges();
+            }
+        }
+        catch (DbUpdateException error)
+        {
+            result.InnerException = error;
+            result.IsAccomplished = false;
+        }
+
+        if (result.InnerException is null)
+        {
+            result.Data = foundProvider is not null;
+            result.IsAccomplished = true;
+        }
+
+        return result;
+    }
+
+    public Result<bool> UpdateProviderState(int id)
+    {
+        Result<bool> result = new();
+        Provider? foundProvider = null;
+
+        try
+        {
+            foundProvider = _context.Find<Provider>(id);
+            if (foundProvider is not null)
+            {
+                foundProvider.Active = !foundProvider.Active;
                 _context.Update(foundProvider);
                 _context.SaveChanges();
             }

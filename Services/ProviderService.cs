@@ -50,6 +50,26 @@ public class ProviderService : IProviderService
         return result;
     }
 
+    public Result<List<ProviderDto>> GetAllProviders()
+    {
+        Result<List<ProviderDto>> result = new();
+
+        var provider = _dao.GetAllProviders();
+
+        if(!provider.IsAccomplished)
+        {
+            //TODO: add logger
+            Console.WriteLine(provider.InnerException?.ToString() ?? "Error al obtener todos los proveedores");
+            result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
+            result.IsAccomplished = false;
+            return result;
+        }
+
+        result.Data = provider.Data;
+        result.IsAccomplished = true;
+        return result;
+    }
+
     public Result<ProviderDto?> GetProvider(int id)
     {
         Result<ProviderDto?> result = new();
@@ -73,6 +93,25 @@ public class ProviderService : IProviderService
         Result<bool> result = new();
 
         var updateResult = _dao.UpdateProvider(provider);
+        if (!updateResult.IsAccomplished)
+        {
+            //TODO: add logger
+            Console.WriteLine(updateResult.InnerException?.ToString() ?? "Error al actualizar proveedor");
+            result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
+            result.IsAccomplished = false;
+            return result;
+        }
+
+        result.Data = updateResult.Data;
+        return result;
+    }
+
+    public Result<bool> UpdateProviderState(int id)
+    {
+        Result<bool> result = new();
+
+        var updateResult = _dao.UpdateProviderState(id);
+        
         if (!updateResult.IsAccomplished)
         {
             //TODO: add logger

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FerreteríaWeb_Backend.Controllers;
 
 [ApiController]
-//[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin")]
 [Route("api/provider")]
 public class ProviderController : ControllerBase
 {
@@ -56,6 +56,23 @@ public class ProviderController : ControllerBase
         return BadRequest(new{ Msg = result.Message });
     }
 
+    [HttpGet]
+    public IActionResult GetAllProviders()
+    {
+        Result<List<ProviderDto>> result = _service.GetAllProviders();
+
+        if(result.IsAccomplished)
+        {
+            return Ok(result.Data);
+        }
+        if(result.InnerException is not null)
+        {
+            return StatusCode(500, new{ Msg = result.Message });
+        }
+
+        return BadRequest(new{ Msg = result.Message });
+    }
+
     [HttpPut("{id}")]
     public IActionResult UpdateProvider(int id, [FromBody] ProviderDto provider)
     {
@@ -66,6 +83,30 @@ public class ProviderController : ControllerBase
 
         provider.Id = id;
         Result<bool> result = _service.UpdateProvider(provider);
+
+        if(result.IsAccomplished)
+        {
+            if (result.Data)
+            {
+                return StatusCode(204);   
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        if(result.InnerException is not null)
+        {
+            return StatusCode(500, new{ Msg = result.Message });
+        }
+
+        return BadRequest(new{ Msg = result.Message });
+    }
+
+    [HttpPatch("{id}/state")]
+    public IActionResult UpdateProviderState(int id)
+    {
+        Result<bool> result = _service.UpdateProviderState(id);
 
         if(result.IsAccomplished)
         {
