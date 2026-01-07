@@ -38,7 +38,7 @@ public class ProviderService : IProviderService
         if (!createdProvider.IsAccomplished)
         {
             //TODO: add logger
-            Console.WriteLine(result.InnerException?.ToString() ?? "Error al registrar proveedor");
+            Console.WriteLine(createdProvider.InnerException?.ToString() ?? "Error al registrar proveedor");
             result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
             result.IsAccomplished = false;
         }
@@ -54,18 +54,17 @@ public class ProviderService : IProviderService
     {
         Result<List<ProviderDto>> result = new();
 
-        var provider = _dao.GetAllProviders();
+        var providersListResult = _dao.GetAllProviders();
 
-        if(!provider.IsAccomplished)
+        if(!providersListResult.IsAccomplished)
         {
-            //TODO: add logger
-            Console.WriteLine(provider.InnerException?.ToString() ?? "Error al obtener todos los proveedores");
+            Console.WriteLine(providersListResult.InnerException?.ToString() ?? "Error al obtener todos los proveedores");
             result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
             result.IsAccomplished = false;
             return result;
         }
 
-        result.Data = provider.Data;
+        result.Data = providersListResult.Data;
         result.IsAccomplished = true;
         return result;
     }
@@ -77,7 +76,6 @@ public class ProviderService : IProviderService
         var provider = _dao.GetProvider(id);
         if(!provider.IsAccomplished)
         {
-            //TODO: add logger
             Console.WriteLine(provider.InnerException?.ToString() ?? "Error al buscar proveedor");
             result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
             result.IsAccomplished = false;
