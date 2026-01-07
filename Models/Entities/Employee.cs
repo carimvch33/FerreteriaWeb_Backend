@@ -30,5 +30,7 @@
 
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
+
+        public List<Sale> Sales { get; } = [];
     }
 }
