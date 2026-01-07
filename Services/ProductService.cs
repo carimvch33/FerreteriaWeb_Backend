@@ -1,4 +1,5 @@
 ﻿using FerreteríaWeb_Backend.DAOs.Interfaces;
+using FerreteríaWeb_Backend.Models.DTOs;
 using FerreteríaWeb_Backend.Models.DTOs.Products;
 using FerreteríaWeb_Backend.Models.Entities;
 using FerreteríaWeb_Backend.Services.Interfaces;
@@ -105,5 +106,22 @@ namespace FerreteríaWeb_Backend.Services
                 .ToList();
         }
 
+        public Result<List<ProductListItemDto>> GetProductsBySearchString(string searchString)
+        {
+            Result<List<ProductListItemDto>> result = new();
+            var productsListResult = _productDao.GetProductsBySearchString(searchString.ToLower());
+
+            if(!productsListResult.IsAccomplished)
+            {
+                Console.WriteLine(productsListResult.InnerException?.ToString() ?? "Error al buscar productos mediante cadena de búsqueda");
+                result.Message = "No es posible realizar la operación ahora. Inténtelo más tarde";
+                result.IsAccomplished = false;
+                return result;
+            }
+
+            result.Data = productsListResult.Data;
+            result.IsAccomplished = true;
+            return result;
+        }
     }
 }

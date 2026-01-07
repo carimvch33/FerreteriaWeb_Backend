@@ -1,6 +1,9 @@
 ﻿using FerreteríaWeb_Backend.DAOs.Interfaces;
 using FerreteríaWeb_Backend.Data;
+using FerreteríaWeb_Backend.Models.DTOs;
+using FerreteríaWeb_Backend.Models.DTOs.Products;
 using FerreteríaWeb_Backend.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FerreteríaWeb_Backend.DAOs
 {
@@ -40,5 +43,40 @@ namespace FerreteríaWeb_Backend.DAOs
                 .ToList();
         }
 
+        public Result<List<ProductListItemDto>> GetProductsBySearchString(string searchString)
+        {
+            Result<List<ProductListItemDto>> result = new();
+            List<ProductListItemDto> products = [];
+
+            try
+            {
+                var queryResult = _context.Products.Where((p) => EF.Functions.Like(p.Name.ToLower(), $"%{searchString}%"));
+                foreach (Product product in queryResult)
+                {
+                    products.Add(new()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description ?? "",
+                        Price = product.Price,
+                        Stock = product.Stock,
+                        CategoryId = product.CategoryId
+                    });
+                }
+            }
+            catch (DbUpdateException error)
+            {
+                result.InnerException = error;
+                result.IsAccomplished = false;
+            }
+
+            if (result.InnerException is null)
+            {
+                result.Data = products;
+                result.IsAccomplished = true;
+            }
+
+            return result;
+        }
     }
 }

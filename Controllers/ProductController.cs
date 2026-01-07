@@ -2,6 +2,7 @@
 using FerreteríaWeb_Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using FerreteríaWeb_Backend.Models.DTOs;
 
 namespace FerreteríaWeb_Backend.Controllers
 {
@@ -91,6 +92,33 @@ namespace FerreteríaWeb_Backend.Controllers
             {
                 return StatusCode(500, "Ocurrió un error inesperado. Por favor intente más tarde.");
             }
+        }
+
+        [Authorize(Roles = "Admin,Employee")]
+        [HttpGet()]
+        public IActionResult GetProductsBySearchString([FromQuery] string s)
+        {
+            if(string.IsNullOrWhiteSpace(s))
+            {
+                return NoContent();
+            }
+
+            Result<List<ProductListItemDto>> result = _productService.GetProductsBySearchString(s);
+
+            if(result.IsAccomplished)
+            {
+                if (result.Data!.Count == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(result.Data);
+            }
+            if(result.InnerException is not null)
+            {
+                return StatusCode(500, new{ Msg = result.Message });
+            }
+
+            return BadRequest(new{ Msg = result.Message });
         }
     }
 

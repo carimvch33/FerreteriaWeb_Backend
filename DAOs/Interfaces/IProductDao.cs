@@ -1,4 +1,6 @@
-﻿using FerreteríaWeb_Backend.Models.Entities;
+﻿using FerreteríaWeb_Backend.Models.DTOs;
+using FerreteríaWeb_Backend.Models.DTOs.Products;
+using FerreteríaWeb_Backend.Models.Entities;
 
 namespace FerreteríaWeb_Backend.DAOs.Interfaces
 {
@@ -9,5 +11,6 @@ namespace FerreteríaWeb_Backend.DAOs.Interfaces
         Product? GetById(int id);
         void Update(Product product);
         List<Product> GetActiveProducts();
+        Result<List<ProductListItemDto>> GetProductsBySearchString(string searchString);
     }
 }

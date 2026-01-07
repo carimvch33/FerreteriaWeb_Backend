@@ -55,3 +55,21 @@ Accept: application/json
 
 PATCH  {{FerreteríaWeb_Backend_HostAddress}}/api/provider/1/state
 ###
+
+GET {{FerreteríaWeb_Backend_HostAddress}}/api/products?s=la
+Accept: application/json
+###
+
+POST {{FerreteríaWeb_Backend_HostAddress}}/api/sale
+Content-Type: application/json
+
+{
+    "paymentMethod": "cash",
+    "employeeId": 2,
+    "saleDetails": [
+        {
+            "productId": 1,
+            "productQuantity": 5
+        }
+    ]
+}
