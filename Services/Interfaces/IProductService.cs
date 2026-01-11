@@ -11,5 +11,6 @@ namespace FerreteríaWeb_Backend.Services.Interfaces
         AddInventoryResponseDto AddInventory(int productId, AddInventoryDto dto);
         List<ProductListItemDto> GetActiveProducts();
         Result<List<ProductListItemDto>> GetProductsBySearchString(string searchString);
+        Result<ProductListItemDto?> GetProductById(int id);
     }
 }

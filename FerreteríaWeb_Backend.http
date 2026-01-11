@@ -73,3 +73,8 @@ Content-Type: application/json
         }
     ]
 }
+
+###
+GET {{FerreteríaWeb_Backend_HostAddress}}/api/products/1
+Accept: application/json
+###

@@ -120,6 +120,27 @@ namespace FerreteríaWeb_Backend.Controllers
 
             return BadRequest(new{ Msg = result.Message });
         }
-    }
 
+        //[Authorize(Roles = "Admin,Employee")]
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            Result<ProductListItemDto?> result = _productService.GetProductById(id);
+
+            if(result.IsAccomplished)
+            {
+                if (result.Data is null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            if(result.InnerException is not null)
+            {
+                return StatusCode(500, new{ Msg = result.Message });
+            }
+
+            return BadRequest(new{ Msg = result.Message });      
+        }
+     }
 }

@@ -50,7 +50,7 @@ namespace FerreteríaWeb_Backend.DAOs
 
             try
             {
-                var queryResult = _context.Products.Where((p) => EF.Functions.Like(p.Name.ToLower(), $"%{searchString}%"));
+                var queryResult = _context.Products.Where((p) => EF.Functions.Like(p.Name.ToLower(), $"%{searchString}%") && p.IsActive);
                 foreach (Product product in queryResult)
                 {
                     products.Add(new()
