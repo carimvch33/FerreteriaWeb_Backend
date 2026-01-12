@@ -1,8 +1,10 @@
-using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Models.DTOs;
+using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Services.Interfaces;
+using FerreteríaWeb_Backend.DAOs.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FerreteríaWeb_Backend.Controllers;
 
@@ -12,10 +14,12 @@ namespace FerreteríaWeb_Backend.Controllers;
 public class SaleController : ControllerBase
 {
     private readonly ISaleService _service;
+    private readonly IEmployeeDao _employeeDao;
 
-    public SaleController(ISaleService service)
+    public SaleController(ISaleService service, IEmployeeDao employeeDao)
     {
         _service = service;
+        _employeeDao = employeeDao;
     }
 
     [HttpPost]
@@ -33,5 +37,21 @@ public class SaleController : ControllerBase
         }
 
         return BadRequest(new{ Msg = result.Message });
+    }
+
+    [HttpGet("cut")]
+    public IActionResult GenerateCut([FromQuery] DateTime from, [FromQuery] DateTime to)
+    {
+        var employeeIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (employeeIdClaim == null) return Unauthorized();
+
+        var employeeId = int.Parse(employeeIdClaim.Value);
+
+        var employee = _employeeDao.GetById(employeeId);
+        if (employee == null) return NotFound(new { Msg = "Empleado no encontrado" });
+
+        var result = _service.GenerateCut(from, to, employee);
+
+        return Ok(result.Data);
     }
 }
