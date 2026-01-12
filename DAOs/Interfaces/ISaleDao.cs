@@ -1,5 +1,5 @@
+using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Models.DTOs;
-using FerreteríaWeb_Backend.Models.Entities;
 
 namespace FerreteríaWeb_Backend.DAOs.Interfaces;
 

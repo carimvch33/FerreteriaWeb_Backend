@@ -1,3 +1,4 @@
+using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Models.DTOs;
 using FerreteríaWeb_Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FerreteríaWeb_Backend.Controllers;
 
 [ApiController]
-//[Authorize(Roles = "Admin,Employee")]
+[Authorize(Roles = "Admin,Employee")]
 [Route("api/sale")]
 public class SaleController : ControllerBase
 {

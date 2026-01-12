@@ -1,5 +1,6 @@
 using FerreteríaWeb_Backend.DAOs.Interfaces;
 using FerreteríaWeb_Backend.Data;
+using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Models.DTOs;
 using FerreteríaWeb_Backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,12 @@ public class SaleDao : ISaleDao
                     ProductQuantity = dto.ProductQuantity
                 }
             );
+
+            foreach(SaleDetail detail in newDetails)
+            {
+                var product = _context.Products.Find(detail.ProductId);
+                product!.Stock = product.Stock - detail.ProductQuantity;
+            }
             _context.SaleDetails.AddRange(newDetails);
             _context.SaveChanges();
 

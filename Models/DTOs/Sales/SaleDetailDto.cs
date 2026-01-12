@@ -1,6 +1,4 @@
-using Microsoft.IdentityModel.Tokens;
-
-namespace FerreteríaWeb_Backend.Models.DTOs;
+namespace FerreteríaWeb_Backend.Models.DTOs.Sales;
 
 public class SaleDetailDto
 {
