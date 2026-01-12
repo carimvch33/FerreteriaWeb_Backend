@@ -76,4 +76,24 @@ public class SaleDao : ISaleDao
 
         return result;
     }
+
+    public List<(PaymentMethod Method, decimal Total)> GetSalesByDateRange(DateTime from, DateTime to)
+    {
+        return _context.Sales
+            .Where(s => s.CreatedAt >= from && s.CreatedAt <= to)
+            .Select(s => new
+            {
+                s.PaymentMethod,
+                Total = s.SaleDetails.Sum(d =>
+                    d.ProductQuantity *
+                    _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Price)
+                        .First()
+                )
+            })
+            .AsEnumerable()
+            .Select(x => (x.PaymentMethod, x.Total))
+            .ToList();
+    }
 }

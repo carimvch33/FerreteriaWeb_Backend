@@ -1,5 +1,6 @@
 using FerreteríaWeb_Backend.DAOs.Interfaces;
 using FerreteríaWeb_Backend.Models.DTOs;
+using FerreteríaWeb_Backend.Models.DTOs.CashRegister;
 using FerreteríaWeb_Backend.Models.DTOs.Sales;
 using FerreteríaWeb_Backend.Models.Entities;
 using FerreteríaWeb_Backend.Services.Interfaces;
@@ -92,6 +93,46 @@ public class SaleService : ISaleService
 
         result.Data = AreProductsAvailable;
         result.IsAccomplished = result.InnerException is null;
+        return result;
+    }
+
+    public Result<CashRegisterCutDto> GenerateCut(DateTime from, DateTime to, Employee employee)
+    {
+        Result<CashRegisterCutDto> result = new();
+
+        var sales = _saleDao.GetSalesByDateRange(from, to);
+
+        decimal cash = 0, card = 0, transfer = 0;
+
+        foreach (var sale in sales)
+        {
+            switch (sale.Method)
+            {
+                case PaymentMethod.Cash:
+                    cash += sale.Total;
+                    break;
+                case PaymentMethod.BankCard:
+                    card += sale.Total;
+                    break;
+                case PaymentMethod.Transfer:
+                    transfer += sale.Total;
+                    break;
+            }
+        }
+
+        result.Data = new CashRegisterCutDto
+        {
+            From = from,
+            To = to,
+            GeneratedByEmployeeName = $"{employee.Name} {employee.LastName} {employee.SecondLastName}",
+            TotalSales = sales.Count,
+            CashTotal = cash,
+            BankCardTotal = card,
+            TransferTotal = transfer,
+            GrandTotal = cash + card + transfer
+        };
+
+        result.IsAccomplished = true;
         return result;
     }
 }
