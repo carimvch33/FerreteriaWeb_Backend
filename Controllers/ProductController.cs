@@ -121,7 +121,7 @@ namespace FerreteríaWeb_Backend.Controllers
             return BadRequest(new{ Msg = result.Message });
         }
 
-        //[Authorize(Roles = "Admin,Employee")]
+        [Authorize(Roles = "Admin,Employee")]
         [HttpGet("{id}")]
         public IActionResult GetProductById(int id)
         {
