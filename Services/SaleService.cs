@@ -135,4 +135,14 @@ public class SaleService : ISaleService
         result.IsAccomplished = true;
         return result;
     }
+
+    public List<CashRegisterSaleDetailDto> GetCutDetails(DateTime from, DateTime to)
+    {
+        return _saleDao.GetSaleDetailsByDateRange(from, to);
+    }
+
+    public SaleTicketDto? GetSaleTicket(int saleId)
+    {
+        return _saleDao.GetSaleTicketById(saleId);
+    }
 }

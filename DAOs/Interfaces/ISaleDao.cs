@@ -7,4 +7,6 @@ public interface ISaleDao
 {
     Result<SaleDto> AddSale(SaleDto sale, PaymentMethod paymentMethod);
     List<(PaymentMethod Method, decimal Total)> GetSalesByDateRange(DateTime from, DateTime to);
+    List<CashRegisterSaleDetailDto> GetSaleDetailsByDateRange(DateTime from, DateTime to);
+    SaleTicketDto? GetSaleTicketById(int saleId);
 }

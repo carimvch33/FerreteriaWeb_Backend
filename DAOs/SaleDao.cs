@@ -96,4 +96,78 @@ public class SaleDao : ISaleDao
             .Select(x => (x.PaymentMethod, x.Total))
             .ToList();
     }
+
+    public List<CashRegisterSaleDetailDto> GetSaleDetailsByDateRange(DateTime from, DateTime to)
+    {
+        return _context.Sales
+            .Where(s => s.CreatedAt >= from && s.CreatedAt <= to)
+            .Select(s => new CashRegisterSaleDetailDto
+            {
+                Date = s.CreatedAt,
+                PaymentMethod = s.PaymentMethod.ToString(),
+                Products = s.SaleDetails.Select(d => new CashRegisterProductDetailDto
+                {
+                    ProductName = _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Name)
+                        .First(),
+
+                    Quantity = d.ProductQuantity,
+
+                    UnitPrice = _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Price)
+                        .First(),
+
+                    Subtotal = d.ProductQuantity *
+                        _context.Products
+                            .Where(p => p.Id == d.ProductId)
+                            .Select(p => p.Price)
+                            .First()
+                }).ToList(),
+
+                Total = s.SaleDetails.Sum(d =>
+                    d.ProductQuantity *
+                    _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Price)
+                        .First()
+                )
+            })
+            .ToList();
+    }
+
+    public SaleTicketDto? GetSaleTicketById(int saleId)
+    {
+        return _context.Sales
+            .Where(s => s.Id == saleId)
+            .Select(s => new SaleTicketDto
+            {
+                Id = s.Id,
+                Date = s.CreatedAt,
+                PaymentMethod = s.PaymentMethod.ToString(),
+                Total = s.SaleDetails.Sum(d =>
+                    d.ProductQuantity *
+                    _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Price)
+                        .First()
+                ),
+                Employee = s.Employee.Name + " " + s.Employee.LastName,
+                Products = s.SaleDetails.Select(d => new SaleProductDto
+                {
+                    Name = _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Name)
+                        .First(),
+                    Quantity = d.ProductQuantity,
+                    Price = _context.Products
+                        .Where(p => p.Id == d.ProductId)
+                        .Select(p => p.Price)
+                        .First()
+                }).ToList()
+            })
+            .FirstOrDefault();
+    }
+
 }
