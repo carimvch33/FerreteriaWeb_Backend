@@ -54,4 +54,22 @@ public class SaleController : ControllerBase
 
         return Ok(result.Data);
     }
+
+    [HttpGet("cut/details")]
+    public IActionResult GetCutDetails([FromQuery] DateTime from, [FromQuery] DateTime to)
+    {
+        var details = _service.GetCutDetails(from, to);
+        return Ok(details);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetSaleTicket(int id)
+    {
+        var ticket = _service.GetSaleTicket(id);
+
+        if (ticket == null)
+            return NotFound(new { Msg = "Venta no encontrada" });
+
+        return Ok(ticket);
+    }
 }
