@@ -78,3 +78,18 @@ Content-Type: application/json
 GET {{FerreteríaWeb_Backend_HostAddress}}/api/products/1
 Accept: application/json
 ###
+
+POST {{FerreteríaWeb_Backend_HostAddress}}/api/purchase
+Content-Type: application/json
+
+{
+    "providerId": 2,
+    "employeeId": 1,
+    "products": [
+        {
+            "id": 1,
+            "quantity": 10
+        }
+    ]
+}
+###

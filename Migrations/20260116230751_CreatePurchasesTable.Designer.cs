@@ -4,6 +4,7 @@ using FerreteríaWeb_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FerreteríaWeb_Backend.Migrations
 {
     [DbContext(typeof(FerreteriaDbContext))]
-    partial class FerreteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260116230751_CreatePurchasesTable")]
+    partial class CreatePurchasesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,9 +208,6 @@ namespace FerreteríaWeb_Backend.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
